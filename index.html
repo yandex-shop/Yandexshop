@@ -107,6 +107,7 @@
       padding: 8px 16px;
       border-radius: 30px;
       transition: 0.2s;
+      cursor: pointer;
     }
 
     .nav-item:hover {
@@ -190,8 +191,8 @@
 
     .service-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 18px;
       margin-top: 8px;
     }
 
@@ -202,6 +203,8 @@
       transition: 0.2s ease;
       border: 1px solid rgba(0,0,0,0.02);
       box-shadow: 0 5px 12px rgba(0,0,0,0.02);
+      display: flex;
+      flex-direction: column;
     }
 
     .service-card:hover {
@@ -232,6 +235,7 @@
       font-size: 0.8rem;
       color: #4f6f8f;
       margin-bottom: 16px;
+      flex-grow: 1;
     }
 
     .price {
@@ -240,6 +244,7 @@
       display: flex;
       align-items: center;
       gap: 4px;
+      margin-bottom: 8px;
     }
 
     .price i {
@@ -247,23 +252,52 @@
       font-size: 0.9rem;
     }
 
-    .btn-order {
+    .order-controls {
+      margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .quantity-input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #dae2ed;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      outline: none;
+      transition: 0.15s;
+    }
+
+    .quantity-input:focus {
+      border-color: #f0b90b;
+      box-shadow: 0 0 0 2px rgba(240,185,11,0.1);
+    }
+
+    .btn-order, .btn-add-cart {
       background: transparent;
       border: 1.5px solid #0b1a2f;
       border-radius: 40px;
-      padding: 6px 16px;
+      padding: 8px 16px;
       font-weight: 600;
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       transition: 0.15s;
       cursor: pointer;
-      margin-top: 12px;
-      display: inline-block;
       color: #0b1a2f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
     }
 
-    .btn-order:hover {
+    .btn-order:hover, .btn-add-cart:hover {
       background: #0b1a2f;
       color: white;
+    }
+
+    .btn-add-cart i {
+      font-size: 0.9rem;
     }
 
     /* RIGHT PANEL — PAYMENT CARD (Binance ID) */
@@ -336,6 +370,7 @@
       -webkit-text-fill-color: transparent;
       margin: 8px 0 4px;
       letter-spacing: 2px;
+      cursor: pointer;
     }
 
     .binance-id-copy {
@@ -361,10 +396,6 @@
     }
 
     .binance-id-copy:hover i {
-      color: #f0b90b;
-    }
-
-    .binance-id-copy i {
       color: #f0b90b;
     }
 
@@ -447,7 +478,166 @@
       background: #1e3a5f;
     }
 
-    /* features list */
+    /* MODAL - Login / Signup + Order quantity */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(11,26,47,0.7);
+      backdrop-filter: blur(5px);
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 40px;
+      padding: 40px;
+      max-width: 450px;
+      width: 90%;
+      box-shadow: 0 30px 50px rgba(0,0,0,0.2);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+
+    .modal-header h3 {
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    .close-modal {
+      font-size: 2rem;
+      cursor: pointer;
+      line-height: 1;
+      color: #6b8aa8;
+    }
+
+    .tab-buttons {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 12px;
+      background: #f1f5f9;
+      border: none;
+      border-radius: 40px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.15s;
+    }
+
+    .tab-btn.active {
+      background: #0b1a2f;
+      color: white;
+    }
+
+    .auth-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .auth-form input {
+      padding: 16px 20px;
+      border: 1px solid #dae2ed;
+      border-radius: 50px;
+      font-size: 1rem;
+      outline: none;
+    }
+
+    .auth-form input:focus {
+      border-color: #f0b90b;
+    }
+
+    .auth-btn {
+      background: #0b1a2f;
+      color: white;
+      border: none;
+      padding: 16px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: 0.15s;
+    }
+
+    .auth-btn:hover {
+      background: #1e3a5f;
+    }
+
+    /* Order quantity modal */
+    .order-modal-content {
+      max-width: 400px;
+    }
+
+    .service-preview {
+      background: #f6f9fc;
+      padding: 16px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+
+    .quantity-selector {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .quantity-selector label {
+      font-weight: 600;
+    }
+
+    .total-price {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #0b1a2f;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .copy-alert {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #0b1a2f;
+      color: white;
+      padding: 12px 32px;
+      border-radius: 60px;
+      font-weight: 500;
+      box-shadow: 0 20px 30px rgba(0,0,0,0.2);
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      z-index: 999;
+      opacity: 0;
+      transition: 0.2s;
+      pointer-events: none;
+    }
+
+    .copy-alert.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .copy-alert i {
+      color: #f0b90b;
+    }
+
     .featured-footer {
       margin-top: 48px;
       display: flex;
@@ -478,34 +668,10 @@
       color: #3a5a73;
     }
 
-    /* copy alert */
-    .copy-alert {
-      position: fixed;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #0b1a2f;
-      color: white;
-      padding: 12px 32px;
-      border-radius: 60px;
-      font-weight: 500;
-      box-shadow: 0 20px 30px rgba(0,0,0,0.2);
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      z-index: 999;
-      opacity: 0;
-      transition: 0.2s;
-      pointer-events: none;
-    }
-
-    .copy-alert.show {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .copy-alert i {
-      color: #f0b90b;
+    #binanceID:hover {
+      text-decoration: underline;
+      text-decoration-color: #f0b90b;
+      text-underline-offset: 6px;
     }
   </style>
 </head>
@@ -515,8 +681,59 @@
     <i class="fas fa-check-circle"></i> Binance ID 761669917 copied!
   </div>
 
+  <!-- Auth Modal (Login / Signup) -->
+  <div id="authModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>🔐 Account</h3>
+        <span class="close-modal" id="closeAuthModal">&times;</span>
+      </div>
+      <div class="tab-buttons">
+        <button id="loginTab" class="tab-btn active">Login</button>
+        <button id="signupTab" class="tab-btn">Sign Up</button>
+      </div>
+      <div id="authFormContainer">
+        <!-- Login form (default) -->
+        <form class="auth-form" id="loginForm">
+          <input type="email" placeholder="Email address" required>
+          <input type="password" placeholder="Password" required>
+          <button type="submit" class="auth-btn">Login to YandexShop</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Order Quantity Modal -->
+  <div id="orderModal" class="modal">
+    <div class="modal-content order-modal-content">
+      <div class="modal-header">
+        <h3>📦 <span id="orderServiceName">Service</span></h3>
+        <span class="close-modal" id="closeOrderModal">&times;</span>
+      </div>
+      <div class="service-preview" id="orderServicePreview">
+        <!-- dynamic filled -->
+      </div>
+      <div class="quantity-selector">
+        <label for="quantityInput">Quantity (1,000 minimum)</label>
+        <input type="number" id="quantityInput" class="quantity-input" value="1000" min="1000" step="500">
+        <div style="display: flex; justify-content: space-between; margin-top: 8px;">
+          <span style="color: #4f6f8f;">Price per 1k</span>
+          <span style="font-weight: 700;" id="pricePer1k">$2.99</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; font-size: 1.1rem;">
+          <span style="font-weight: 600;">Total:</span>
+          <span class="total-price" id="totalPrice">$2.99</span>
+        </div>
+      </div>
+      <button class="auth-btn" id="confirmOrderBtn">✅ Confirm order</button>
+      <p style="font-size: 0.75rem; color: #708aa5; margin-top: 16px; text-align: center;">
+        <i class="fas fa-shield-alt"></i> Funds will be reserved from your balance
+      </p>
+    </div>
+  </div>
+
   <div class="container">
-    <!-- HEADER / NAVIGATION (modern SMM panel vibe) -->
+    <!-- HEADER / NAVIGATION with Account creation/login trigger -->
     <div class="navbar">
       <div class="logo">
         <i class="fas fa-cube"></i>
@@ -530,13 +747,15 @@
         <div class="balance-hint">
           <i class="fas fa-coins"></i> $1,842.50
         </div>
-        <a href="#" class="nav-item"><i class="fas fa-user-circle"></i></a>
+        <div class="nav-item" id="accountButton">
+          <i class="fas fa-user-circle"></i> Sign in
+        </div>
       </div>
     </div>
 
-    <!-- DASHBOARD: main content + fixed binance payment card -->
+    <!-- DASHBOARD: main content + binance payment card -->
     <div class="dashboard-grid">
-      <!-- LEFT: service cards (modern SMM) -->
+      <!-- LEFT: service cards with updated YouTube prices -->
       <div>
         <div class="services-header">
           <h2>🔥 Top SMM services</h2>
@@ -547,51 +766,68 @@
         </div>
 
         <div class="service-grid">
-          <div class="service-card">
+          <!-- Instagram -->
+          <div class="service-card" data-service="Instagram followers" data-price="2.99">
             <div class="service-icon"><i class="fab fa-instagram"></i></div>
             <h4>Instagram followers</h4>
             <div class="service-desc">Real & active, instant start</div>
             <div class="price"><i class="fas fa-bolt"></i> $2.99 / 1k</div>
-            <button class="btn-order">Order</button>
+            <div class="order-controls">
+              <button class="btn-order order-trigger">➕ Order now</button>
+            </div>
           </div>
-          <div class="service-card">
+          <!-- TikTok -->
+          <div class="service-card" data-service="TikTok likes" data-price="1.49">
             <div class="service-icon"><i class="fab fa-tiktok"></i></div>
             <h4>TikTok likes</h4>
             <div class="service-desc">High quality, no drop</div>
             <div class="price"><i class="fas fa-bolt"></i> $1.49 / 1k</div>
-            <button class="btn-order">Order</button>
+            <div class="order-controls">
+              <button class="btn-order order-trigger">➕ Order now</button>
+            </div>
           </div>
-          <div class="service-card">
+          <!-- YouTube subscribers - $4 per 1k (exact) -->
+          <div class="service-card" data-service="YouTube subscribers" data-price="4.00">
             <div class="service-icon"><i class="fab fa-youtube"></i></div>
-            <h4>YouTube views</h4>
-            <div class="service-desc">HD, retention 60%+</div>
-            <div class="price"><i class="fas fa-bolt"></i> $3.25 / 1k</div>
-            <button class="btn-order">Order</button>
+            <h4>YouTube subscribers</h4>
+            <div class="service-desc">High retention, fast delivery</div>
+            <div class="price"><i class="fas fa-bolt"></i> $4.00 / 1k</div>
+            <div class="order-controls">
+              <button class="btn-order order-trigger">➕ Order now</button>
+            </div>
           </div>
-          <div class="service-card">
+          <!-- YouTube live views - $1 per 1k (exact) -->
+          <div class="service-card" data-service="YouTube live views" data-price="1.00">
+            <div class="service-icon"><i class="fab fa-youtube"></i></div>
+            <h4>YouTube live views</h4>
+            <div class="service-desc">Live stream, 24h refill</div>
+            <div class="price"><i class="fas fa-bolt"></i> $1.00 / 1k</div>
+            <div class="order-controls">
+              <button class="btn-order order-trigger">➕ Order now</button>
+            </div>
+          </div>
+          <!-- Telegram -->
+          <div class="service-card" data-service="Telegram members" data-price="1.99">
             <div class="service-icon"><i class="fab fa-telegram"></i></div>
             <h4>Telegram members</h4>
             <div class="service-desc">Premium users, 30d refill</div>
             <div class="price"><i class="fas fa-bolt"></i> $1.99 / 1k</div>
-            <button class="btn-order">Order</button>
+            <div class="order-controls">
+              <button class="btn-order order-trigger">➕ Order now</button>
+            </div>
           </div>
-          <div class="service-card">
+          <!-- Facebook -->
+          <div class="service-card" data-service="Facebook page likes" data-price="2.39">
             <div class="service-icon"><i class="fab fa-facebook"></i></div>
             <h4>Facebook page likes</h4>
             <div class="service-desc">Regional targeted</div>
             <div class="price"><i class="fas fa-bolt"></i> $2.39 / 1k</div>
-            <button class="btn-order">Order</button>
-          </div>
-          <div class="service-card">
-            <div class="service-icon"><i class="fab fa-twitter"></i></div>
-            <h4>Twitter retweets</h4>
-            <div class="service-desc">from real accounts</div>
-            <div class="price"><i class="fas fa-bolt"></i> $1.79 / 1k</div>
-            <button class="btn-order">Order</button>
+            <div class="order-controls">
+              <button class="btn-order order-trigger">➕ Order now</button>
+            </div>
           </div>
         </div>
 
-        <!-- additional stats / modern badge -->
         <div style="margin-top: 32px;" class="responsive-hint">
           <i class="fas fa-circle-nodes" style="margin-right: 8px; color: #f0b90b;"></i> 
           AI-optimized delivery • 99.9% uptime • instant top-up via Binance ID
@@ -612,7 +848,7 @@
             Fast, secure, 0% fee — use our merchant ID
           </div>
 
-          <!-- BINANCE ID DISPLAY (exactly 761669917 as requested) -->
+          <!-- BINANCE ID DISPLAY (exactly 761669917) -->
           <div class="binance-id-container">
             <div class="binance-id-label">Binance ID (payment)</div>
             <div class="binance-id-value" id="binanceID">761669917</div>
@@ -621,14 +857,12 @@
                 <i class="fas fa-copy"></i> Copy ID
               </button>
             </div>
-            <!-- subtle QR code simulation — just for modern look -->
             <div class="qr-sim">
               <i class="fas fa-qrcode"></i>
             </div>
             <div style="font-size: 0.75rem; color: #6b8aa8; margin-top: 8px;">scan or copy ID</div>
           </div>
 
-          <!-- CLEAR INSTRUCTION: model payment with Binance ID 761669917 -->
           <div style="margin-top: 8px;">
             <div class="instruction-step">
               <div class="step-num">1</div>
@@ -644,16 +878,14 @@
             </div>
           </div>
 
-          <!-- Deposit CTA with binance ID again (model) -->
           <button class="deposit-btn" id="depositBinanceBtn">
             <i class="fas fa-bolt"></i> Pay with Binance ID 761669917
           </button>
           <p style="font-size: 0.7rem; color: #708aa5; margin-top: 16px; text-align: center;">
-            <i class="fas fa-shield-alt"></i> You'll be asked to confirm. only send to ID: 761669917
+            <i class="fas fa-shield-alt"></i> Only send to ID: 761669917
           </p>
         </div>
 
-        <!-- additional trust badges -->
         <div style="margin-top: 20px; display: flex; gap: 12px; justify-content: space-between;">
           <span style="background: white; border-radius: 60px; padding: 8px 16px; font-size: 0.8rem; font-weight: 600;"><i class="fas fa-lock" style="color: #f0b90b;"></i> USDT/BUSD accepted</span>
           <span style="background: white; border-radius: 60px; padding: 8px 16px; font-size: 0.8rem; font-weight: 600;"><i class="fas fa-clock"></i> instant credit</span>
@@ -686,77 +918,162 @@
     (function() {
       "use strict";
 
-      const BINANCE_ID = '761669917';  // model payment ID – exactly as required
-      const copyBtn = document.getElementById('copyBinanceBtn');
-      const depositBtn = document.getElementById('depositBinanceBtn');
-      const toast = document.getElementById('copyToast');
-
-      // universal copy function
+      const BINANCE_ID = '761669917';
+      
+      // ----- BINANCE COPY FUNCTIONALITY -----
       function copyBinanceId() {
         navigator.clipboard.writeText(BINANCE_ID).then(() => {
-          toast.classList.add('show');
-          setTimeout(() => {
-            toast.classList.remove('show');
-          }, 2000);
+          showToast('Binance ID 761669917 copied!');
         }).catch(() => {
-          // fallback
           const textArea = document.createElement('textarea');
           textArea.value = BINANCE_ID;
           document.body.appendChild(textArea);
           textArea.select();
           document.execCommand('copy');
           document.body.removeChild(textArea);
-          toast.classList.add('show');
-          setTimeout(() => {
-            toast.classList.remove('show');
-          }, 2000);
+          showToast('Binance ID 761669917 copied!');
         });
       }
 
-      // Event listeners for copy
-      if (copyBtn) {
-        copyBtn.addEventListener('click', copyBinanceId);
+      function showToast(msg) {
+        const toast = document.getElementById('copyToast');
+        toast.innerHTML = `<i class="fas fa-check-circle"></i> ${msg}`;
+        toast.classList.add('show');
+        setTimeout(() => {
+          toast.classList.remove('show');
+        }, 2000);
       }
 
-      // Deposit button also copies ID or simulates redirect (modern UX)
-      if (depositBtn) {
-        depositBtn.addEventListener('click', function(e) {
+      // ----- AUTH MODAL (Account creation / Login) -----
+      const authModal = document.getElementById('authModal');
+      const accountBtn = document.getElementById('accountButton');
+      const closeAuthModal = document.getElementById('closeAuthModal');
+      const loginTab = document.getElementById('loginTab');
+      const signupTab = document.getElementById('signupTab');
+      const authFormContainer = document.getElementById('authFormContainer');
+
+      accountBtn.addEventListener('click', () => {
+        authModal.style.display = 'flex';
+      });
+
+      closeAuthModal.addEventListener('click', () => {
+        authModal.style.display = 'none';
+      });
+
+      window.addEventListener('click', (e) => {
+        if (e.target === authModal) {
+          authModal.style.display = 'none';
+        }
+        if (e.target === orderModal) {
+          orderModal.style.display = 'none';
+        }
+      });
+
+      // Tab switching
+      function setAuthForm(type) {
+        if (type === 'login') {
+          authFormContainer.innerHTML = `
+            <form class="auth-form" id="loginForm">
+              <input type="email" placeholder="Email address" required>
+              <input type="password" placeholder="Password" required>
+              <button type="submit" class="auth-btn">Login to YandexShop</button>
+            </form>
+          `;
+          loginTab.classList.add('active');
+          signupTab.classList.remove('active');
+        } else {
+          authFormContainer.innerHTML = `
+            <form class="auth-form" id="signupForm">
+              <input type="text" placeholder="Full name" required>
+              <input type="email" placeholder="Email address" required>
+              <input type="password" placeholder="Password" required>
+              <button type="submit" class="auth-btn">Create account</button>
+            </form>
+          `;
+          signupTab.classList.add('active');
+          loginTab.classList.remove('active');
+        }
+        // attach submit to prevent actual submit and close modal
+        const form = authFormContainer.querySelector('form');
+        form.addEventListener('submit', (e) => {
           e.preventDefault();
-          // first copy ID to clipboard as convenience
-          copyBinanceId();
-          // optional subtle simulation: can open modal or just show toast.
-          // We'll add extra visual feedback without real redirect.
-          depositBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> redirect to Binance...';
-          depositBtn.style.opacity = '0.9';
-          setTimeout(() => {
-            depositBtn.innerHTML = '<i class="fas fa-bolt"></i> Pay with Binance ID 761669917';
-            depositBtn.style.opacity = '1';
-            toast.textContent = '✔️ Demo: use ID 761669917 in Binance app';
-            toast.classList.add('show');
-            setTimeout(() => {
-              toast.classList.remove('show');
-              toast.textContent = 'Binance ID 761669917 copied!'; // reset text
-            }, 2500);
-          }, 1800);
+          showToast('✅ Account ready (demo)');
+          authModal.style.display = 'none';
+          accountBtn.innerHTML = '<i class="fas fa-user-circle"></i> My Account';
         });
       }
 
-      // also if someone clicks the ID value itself, copy
-      const binanceIdElement = document.getElementById('binanceID');
-      if (binanceIdElement) {
-        binanceIdElement.addEventListener('click', copyBinanceId);
-        binanceIdElement.style.cursor = 'pointer';
+      loginTab.addEventListener('click', () => setAuthForm('login'));
+      signupTab.addEventListener('click', () => setAuthForm('signup'));
+
+      // ----- ORDER MODAL with quantity -----
+      const orderModal = document.getElementById('orderModal');
+      const closeOrderModal = document.getElementById('closeOrderModal');
+      const orderServiceName = document.getElementById('orderServiceName');
+      const orderServicePreview = document.getElementById('orderServicePreview');
+      const pricePer1kSpan = document.getElementById('pricePer1k');
+      const quantityInput = document.getElementById('quantityInput');
+      const totalPriceSpan = document.getElementById('totalPrice');
+      const confirmOrderBtn = document.getElementById('confirmOrderBtn');
+
+      let currentService = '';
+      let currentPricePer1k = 0;
+
+      // Open order modal when click on "Order now"
+      document.querySelectorAll('.order-trigger').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          const card = this.closest('.service-card');
+          currentService = card.dataset.service;
+          currentPricePer1k = parseFloat(card.dataset.price);
+          
+          orderServiceName.textContent = currentService;
+          orderServicePreview.innerHTML = `<div style="display:flex; align-items:center; gap:12px;">
+            <div class="service-icon" style="margin-bottom:0;">${card.querySelector('.service-icon').innerHTML}</div>
+            <div><strong>${currentService}</strong><br><span style="color:#4f6f8f;">instant delivery</span></div>
+          </div>`;
+          
+          pricePer1kSpan.textContent = `$${currentPricePer1k.toFixed(2)}`;
+          quantityInput.value = 1000;
+          updateTotalPrice();
+          
+          orderModal.style.display = 'flex';
+        });
+      });
+
+      function updateTotalPrice() {
+        const qty = parseInt(quantityInput.value) || 1000;
+        const total = (qty / 1000) * currentPricePer1k;
+        totalPriceSpan.innerHTML = `$${total.toFixed(2)}`;
       }
+
+      quantityInput.addEventListener('input', updateTotalPrice);
+
+      confirmOrderBtn.addEventListener('click', function() {
+        const qty = parseInt(quantityInput.value) || 1000;
+        const total = ((qty / 1000) * currentPricePer1k).toFixed(2);
+        showToast(`✅ Ordered ${qty} ${currentService} for $${total}`);
+        orderModal.style.display = 'none';
+      });
+
+      closeOrderModal.addEventListener('click', () => {
+        orderModal.style.display = 'none';
+      });
+
+      // ----- BINANCE ID COPY -----
+      document.getElementById('copyBinanceBtn').addEventListener('click', copyBinanceId);
+      document.getElementById('binanceID').addEventListener('click', copyBinanceId);
+      
+      // Deposit button with Binance ID
+      document.getElementById('depositBinanceBtn').addEventListener('click', function(e) {
+        e.preventDefault();
+        copyBinanceId();
+        showToast('✨ Use ID 761669917 in Binance app');
+      });
+
+      // Initialize default auth form (login)
+      setAuthForm('login');
     })();
   </script>
-
-  <!-- tiny style for interactive elements -->
-  <style>
-    #binanceID:hover {
-      text-decoration: underline;
-      text-decoration-color: #f0b90b;
-      text-underline-offset: 6px;
-    }
-  </style>
 </body>
 </html>
